@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventReenable", "EventReena
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomNames", "CustomNames\CustomNames.csproj", "{2DD7170A-80B7-4A26-B7BD-A3D23BAA0833}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DuckConnect", "DuckConnect\DuckConnect.csproj", "{910C6AA5-7805-46E1-A597-7A8904E04BAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{2DD7170A-80B7-4A26-B7BD-A3D23BAA0833}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DD7170A-80B7-4A26-B7BD-A3D23BAA0833}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DD7170A-80B7-4A26-B7BD-A3D23BAA0833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{910C6AA5-7805-46E1-A597-7A8904E04BAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{910C6AA5-7805-46E1-A597-7A8904E04BAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{910C6AA5-7805-46E1-A597-7A8904E04BAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{910C6AA5-7805-46E1-A597-7A8904E04BAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
