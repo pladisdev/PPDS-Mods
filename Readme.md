@@ -1,3 +1,5 @@
+Make sure to check out the original mod which I forked to make this mod.
+https://github.com/KitsueFox/PPDS-Mods
 
 # Added Mod
 
