@@ -1,54 +1,35 @@
-# My apologizes but due to life, I'm unable to keep updating these mods at this time. I'll archive the project for now, If you wish to fork this and keep modding feel free. I'll unarchive it once I start getting free time.
 
-# Placid Plastic Duck Simulator - Mods 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/KitsueFox/PPDS-Mods/dotnet.yml?style=for-the-badge)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/KitsueFox/PPDS-Mods?style=for-the-badge)
-![MelonLoader Version](https://img.shields.io/badge/Melonloader-0.5.7-red?style=for-the-badge&)
-![GitHub](https://img.shields.io/github/license/KitsueFox/PPDS-Mods?style=for-the-badge)
+# Added Mod
 
-This repository contains my mods
-for [Placid Plastic Duck Simulator](https://store.steampowered.com/app/1999360/Placid_Plastic_Duck_Simulator/). I'm not 
-responsible for you save data being corrupted, Please backup before modding the game!
+## Duck Connect
 
-# **You need at least MelonLoader v0.5.7!**
+### Connects to PPDS with MQTT. Allows external control with other applications. 
 
-# Current Mods
+* Quack duck
+* Switch duck (each switch gives the name and id of the duck back)
+* Ability to rename duck
 
-## Duck Trainer
-**Achievements will be disabled by default to prevent cheating. If you wish to cheat anyways edit the `MelonPreferences.cfg`**
+### Running the example script
 
-### Open GUI "F9"
-
-* Spawn Ducks (K)
-* Duck Movement (**Space** *to fly*)
-* Duck All Quack
-* Respawn All Ducks (H)
-* Clear Weather
-* Ducks Auto Respawn (*Never Loose a duck again*)
-* Snowplow Controls
-
-*Make sure to have one Movement Controls on at a time*
-
-## Custom Names
-Instructions: 
-* Copy a name to your clipboard
-* Press Num0
-* Profit!
-
-This mod allows better customization for naming the ducks and even change the color and style of the name tag with [Rich Text](https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html) as shown down below
-![Placid_Plastic_Duck_Simulator_2T1JtRodId](https://user-images.githubusercontent.com/80623201/221664098-8278bb96-da26-464d-89a2-20a516d8ba23.jpg)
-
-It's also allows the same duck to have a different name and longer names as shown in the video below
-[![CustomName Demo](https://img.youtube.com/vi/kDhJ9IOkwtg/0.jpg)](https://www.youtube.com/watch?v=kDhJ9IOkwtg)
-
-## Event Reenabler
-Adds back the Ducks from the Christmas Event. Incase you missed it or accidentally lost your save file.
+* Download an MQTT broker. Simplest one is Mosquitto (https://mosquitto.org/). I added issues reaching the website recently so I also recommend EMQX. Once the broker is running on localhost, port 1883 you can run the example script
+* Follow the step for installation, then try running the duck_example.py script. You will need paho-mqtt which can be installed with pip install paho-mqtt. 
 
 ## Installation
 To install these mods, you will need to install [MelonLoader](https://discord.gg/2Wn3N2P) (discord link, see \#how-to-install).
-Then, you will have to put mod .dll files from [releases](https://github.com/KitsueFox/PPDS-Mods/releases) into the `Mods` folder of your game directory
+Then, you will have to put mod .dll file from [releases](https://github.com/pladisdev/PPDS-Mods) into the `Mods` folder of your game directory
+* You will also need a M2Mqtt.Net.dll to run the mod. You can get it from here (https://www.nuget.org/packages/M2Mqtt/). Donwload the package and open it (I used 7zip). In `<m2mqtt dir>\lib\net45` you can find a M2Mqtt.Net.dll file. Place this in `<Placid Plastic Duck Simulator Instanll dir>\UserLibs`
 
 ## Building
 To build these, drop required libraries (found in `<Placid Plastic Duck Simulator Instanll dir>\Placid Plastic Duck Simulator_Data\Managed` and both `MelonLoader.dll` `0Harmony.dll` from `<Placid Plastic Duck Simulator Instanll dir>\MelonLoader` after melonloader installation, 
-list found in `Directory.Build.props`) into Libs folder, then use your IDE of choice to build.
+list found in `Directory.Build.props`) into Libs folder, then use your IDE of choice to build. 
+* You will also need M2Mqtt package from NuGet. v4.3 from Paolo. I used Visual Studio 2022 to get this package. You will get the same DLL file needed for installation.
 * Libs folder is intended for newest libraries (MelonLoader 0.5.7)
+
+## TODO
+* Add description for each duckid, to better describe each duck for AI.
+* Ability to move camera remotely.
+* Intro screen control, automatically start instance
+* Delete names remotely
+* Better MQTT configuration
+* Switch from MQTT to something simpler
+

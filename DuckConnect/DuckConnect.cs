@@ -13,7 +13,7 @@ using Object = UnityEngine.Object;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
-[assembly: MelonInfo(typeof(DuckConnect), "DuckConnect", "0.1.0", "Pladis", "https://github.com/KitsueFox/PPDS-Mods")]
+[assembly: MelonInfo(typeof(DuckConnect), "DuckConnect", "0.1.0", "Pladis", "https://github.com/pladisdev/PPDS-Mods")]
 [assembly: MelonGame("Turbolento Games", "Placid Plastic Duck Simulator")]
 
 namespace Duck_Connect
