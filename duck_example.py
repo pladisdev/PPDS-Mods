@@ -53,8 +53,9 @@ class Duck_Example:
                 self.duck_naming = True
                 print(f"You are looking at a {duck_id} duck with no name. What do you want to name it?")
                 client.publish("ppds/duckname", input())
-                self.duck_naming = False
                 self.tab_time = time.time() + 5
+                self.duck_naming = False
+                
             else:
                 print(f"You are looking at a {duck_id} duck with the name '{duck_name}'.")
 
