@@ -15,7 +15,7 @@ https://www.youtube.com/watch?v=bJL7ObEZeV8&t=125s
 ### Running the example script
 
 * Download an MQTT broker. Simplest one is Mosquitto (https://mosquitto.org/). I added issues reaching the website recently so I also recommend EMQX. Once the broker is running on localhost, port 1883 you can run the example script
-* Follow the step for installation, then try running the duck_example.py script. You will need paho-mqtt which can be installed with pip install paho-mqtt. 
+* Follow the step for installation, then try running the duck_example.py script. You will need paho-mqtt which can be installed with `pip install paho-mqtt`. 
 
 ## Installation
 To install these mods, you will need to install [MelonLoader](https://discord.gg/2Wn3N2P) (discord link, see \#how-to-install).
