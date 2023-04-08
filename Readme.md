@@ -21,7 +21,7 @@ https://www.youtube.com/watch?v=bJL7ObEZeV8&t=125s
 
 ## Installation
 To install these mods, you will need to install [MelonLoader](https://discord.gg/2Wn3N2P) (discord link, see \#how-to-install).
-Then, you will have to put mod .dll file from [releases](https://github.com/pladisdev/PPDS-Mods) into the `Mods` folder of your game directory
+Then, you will have to put mod .dll file from [releases](https://github.com/pladisdev/PPDS-Mods/releases/tag/update-2023-02-27) into the `Mods` folder of your game directory
 * You will also need a M2Mqtt.Net.dll to run the mod. 
 * You can get it from here (https://www.nuget.org/packages/M2Mqtt/). 
 * Donwload the package and open it (I used 7zip). In `<m2mqtt dir>\lib\net45` you can find a M2Mqtt.Net.dll file. 
