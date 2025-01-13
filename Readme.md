@@ -2,7 +2,7 @@ Make sure to check out the original mod which I forked to make this mod.
 https://github.com/KitsueFox/PPDS-Mods
 
 # IMPORTANT
-Current mod is broken due to new update. the solution is pretty simple, the dll needs to be rebuilt with the new fusion library. I think the existing library dlls also need to be updated. Will attempt to fix when I have time.
+Some things are fixed with latest update. Some features not implemented, but are in code. Haven't really tested this all that much but hey, it works on my machine.
 
 # Added Mod
 
