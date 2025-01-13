@@ -1,0 +1,413 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<RootNamespace>PPDS_DuckConnect</RootNamespace>
+		<LangVersion>default</LangVersion>
+		<IsPackable>false</IsPackable>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<AssemblyName>PPDS_DuckConnect</AssemblyName>
+		<LangVersion>latest</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Reference Include="Assembly-CSharp-firstpass">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Assembly-CSharp-firstpass.dll</HintPath>
+		</Reference>
+		<Reference Include="Assembly-CSharp">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2Cppcom.rlabrecque.steamworks.net">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2Cppcom.rlabrecque.steamworks.net.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppCW.Common">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppCW.Common.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppDOTween">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppDOTween.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppDOTweenPro">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppDOTweenPro.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppEnviro3.Runtime">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppEnviro3.Runtime.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppFusion.Addressables">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppFusion.Addressables.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppFusion.Common">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppFusion.Common.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppFusion.Realtime">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppFusion.Realtime.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppFusion.Runtime">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppFusion.Runtime.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppFusion.Sockets">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppFusion.Sockets.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppLeanCommon">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppLeanCommon.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppLeanTouch">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppLeanTouch.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppMeshBakerCore">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppMeshBakerCore.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppMono.Security">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppMono.Security.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2Cppmscorlib">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppNanoSockets">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppNanoSockets.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppNewtonsoft.Json">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppNewtonsoft.Json.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppPhoton3Unity3D">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppPhoton3Unity3D.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppProfanityFilter">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppProfanityFilter.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppRewired_Core">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppRewired_Core.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppRewired_Windows">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppRewired_Windows.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Configuration">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppSystem.Configuration.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Core">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppSystem.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Data">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppSystem.Data.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppSystem.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Drawing">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppSystem.Drawing.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Net.Http">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppSystem.Net.Http.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Numerics">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppSystem.Numerics.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Runtime.Serialization">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppSystem.Runtime.Serialization.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Xml">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppSystem.Xml.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Xml.Linq">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppSystem.Xml.Linq.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppTayx.Graphy">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppTayx.Graphy.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppUIEffect">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2CppUIEffect.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2Cpp__Generated">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Il2Cpp__Generated.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Addressables">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.Addressables.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Burst">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.Burst.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Localization">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.Localization.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Postprocessing.Runtime">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.ResourceManager">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.ResourceManager.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Services.Analytics">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.Services.Analytics.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Configuration">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Configuration.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Device">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Device.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Services.Core">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.Services.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Environments.Internal">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Environments.Internal.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Internal">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Internal.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Registration">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Registration.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Scheduler">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Scheduler.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Telemetry">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Telemetry.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Threading">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Threading.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.TextMeshPro">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\Unity.TextMeshPro.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AccessibilityModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.AccessibilityModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AIModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.AIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AndroidJNIModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.AndroidJNIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AnimationModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.AnimationModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ARModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.ARModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AssetBundleModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.AssetBundleModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AudioModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.AudioModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ClothModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.ClothModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ClusterInputModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.ClusterInputModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ClusterRendererModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.ClusterRendererModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ContentLoadModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.ContentLoadModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.CrashReportingModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.CrashReportingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.DirectorModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.DirectorModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.DSPGraphModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.DSPGraphModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.GameCenterModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.GameCenterModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.GIModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.GIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.GridModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.GridModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.HotReloadModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.HotReloadModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ImageConversionModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.ImageConversionModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.IMGUIModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.IMGUIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.InputLegacyModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.InputLegacyModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.InputModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.InputModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.JSONSerializeModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.JSONSerializeModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.LocalizationModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.LocalizationModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.NVIDIAModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.NVIDIAModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ParticleSystemModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.ParticleSystemModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.PerformanceReportingModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.PerformanceReportingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.Physics2DModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.Physics2DModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.PhysicsModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.PhysicsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ProfilerModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.ProfilerModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.PropertiesModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.PropertiesModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ScreenCaptureModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.ScreenCaptureModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.SharedInternalsModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.SharedInternalsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.SpriteMaskModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.SpriteMaskModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.SpriteShapeModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.SpriteShapeModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.StreamingModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.StreamingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.SubstanceModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.SubstanceModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.SubsystemsModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.SubsystemsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TerrainModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.TerrainModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TerrainPhysicsModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TextCoreFontEngineModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TextCoreTextEngineModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TextRenderingModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.TextRenderingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TilemapModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.TilemapModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TLSModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.TLSModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UI">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.UI.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UIElementsModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.UIElementsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UIModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.UIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UmbraModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.UmbraModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityAnalyticsModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityConnectModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.UnityConnectModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityCurlModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.UnityCurlModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityTestProtocolModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestAudioModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestTextureModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestWWWModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.VehiclesModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.VehiclesModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.VFXModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.VFXModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.VideoModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.VideoModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.VirtualTexturingModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.VirtualTexturingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.VRModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.VRModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.WindModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.WindModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.XRModule">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\Il2CppAssemblies\UnityEngine.XRModule.dll</HintPath>
+		</Reference>
+		<Reference Include="MelonLoader">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\net6\MelonLoader.dll</HintPath>
+		</Reference>
+		<Reference Include="0Harmony">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\net6\0Harmony.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppInterop.Runtime">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppInterop.Common">
+			<HintPath>L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\MelonLoader\net6\Il2CppInterop.Common.dll</HintPath>
+		</Reference>
+
+	</ItemGroup>
+
+	<PropertyGroup>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="Core.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="M2Mqtt" Version="4.3.0" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+	
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="COPY &quot;$(TargetPath)&quot; &quot;L:\SteamLibrary\steamapps\common\Placid Plastic Duck Simulator\Mods&quot;" />
+	</Target>
+</Project>

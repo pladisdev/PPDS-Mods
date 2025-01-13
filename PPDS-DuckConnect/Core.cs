@@ -1,22 +1,20 @@
-﻿using Duck_Connect;
-using HarmonyLib;
-using MelonLoader;
+﻿using HarmonyLib;
+using Il2Cpp;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
+using MelonLoader;
 using System.Reflection.Emit;
-using System.Text;
 using UnityEngine.SceneManagement;
-using Object = UnityEngine.Object;
-
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
-
-[assembly: MelonInfo(typeof(DuckConnect), "DuckConnect", "0.1.0", "Pladis", "https://github.com/pladisdev/PPDS-Mods")]
+using Object = UnityEngine.Object;
+using System.Text;
+using UnityEngine;
+using Il2CppEnviro;
+using System.Reflection;
+[assembly: MelonInfo(typeof(PPDS_DuckConnect.Core), "DuckConnect", "0.2.0", "Pladis", "https://github.com/pladisdev/PPDS-Mods")]
 [assembly: MelonGame("Turbolento Games", "Placid Plastic Duck Simulator")]
 
-namespace Duck_Connect
+namespace PPDS_DuckConnect
 {
     public class DuckObject
     {
@@ -24,36 +22,56 @@ namespace Duck_Connect
         public string DuckName { get; set; }
     }
 
-    public class DuckConnect : MelonMod
+    public class Core : MelonMod
     {
-        public static DuckConnect _instance;
-
+        public static Core _instance;
         private static GeneralManager _generalManager;
         private static readonly string _savePath = "./UserData/CustomNames.json";
         private static string _savecontent;
         public static bool NewDuck = false;
         public static Dictionary<string, string> _duckNames = new();
         public static Dictionary<string, int> _ducks = new();
-
+        public static bool AutoName { get; set; }
         private MqttClient mqttClient;
         private static readonly string brokerIpAddress = "localhost";
         private static readonly int brokerPort = 1883;
-        private static readonly  string clientId = "duck_client";
+        private static readonly string clientId = "duck_client";
         private static readonly string tabTopic = "ppds/tab";
         private static readonly string quackTopic = "ppds/quack";
         private static readonly string duckNameTopic = "ppds/duckname";
+        private static readonly string spawnDuckTopic = "ppds/spawn";
+        private static readonly string eraseNamesTopic = "ppds/erase";
         private static readonly string duckIDTopic = "ppds/duckid";
 
-        private bool nameChange = false;
-        private string newName = null;
+        public static DuckManager currentduck { get; set; }
+        public string duckName = "";
+
+        private string currentScene = "";
+        private bool spawnDuck = false;
 
         public override void OnEarlyInitializeMelon()
         {
             _instance = this;
         }
 
+        public static class CustomNameSettings //MelonSettings for the Mod
+        {
+            private const string SettingsCategory = "CustomNames";
+            internal static MelonPreferences_Entry<bool> AutoName;
+
+            internal static void RegisterSettings()
+            {
+                var category = MelonPreferences.CreateCategory(SettingsCategory, "CustomNames");
+                AutoName = category.CreateEntry("AutoName", false, "Auto Name",
+                    "Newly Spawning Ducks will be Auto Nammed via clipboard");
+            }
+        }
+
         public override void OnInitializeMelon()
         {
+            CustomNameSettings.RegisterSettings();
+            AutoName = CustomNameSettings.AutoName.Value;
+
             //Save File
             if (!File.Exists(_savePath))
             {
@@ -69,22 +87,20 @@ namespace Duck_Connect
             var harmony = new HarmonyLib.Harmony("Custom_Names");
             try
             {
-                harmony.PatchAll(typeof(GeneralManager_AddDuck));
-                _instance.LoggerInstance.Msg("General Manager Start Patched!");
-
-                harmony.PatchAll(typeof(GeneralManager_Start));
+                harmony.PatchAll(typeof(DuckTrainerPatch.GeneralManager_AddDuck));
                 _instance.LoggerInstance.Msg("General Manager Add Patched!");
 
-                harmony.PatchAll(typeof(SpawnUpdate_Patch));
+                harmony.PatchAll(typeof(DuckTrainerPatch.SpawnUpdate_Patch));
                 _instance.LoggerInstance.Msg("Spawn Update Patched!");
             }
             catch (Exception e)
             {
+
                 _instance.LoggerInstance.Msg(e);
             }
 
             try
-            {            
+            {
                 mqttClient = new MqttClient(brokerIpAddress, brokerPort, false, null, null, MqttSslProtocols.None);
                 mqttClient.MqttMsgPublishReceived += OnMqttMsgPublishReceived;
                 mqttClient.Connect(clientId);
@@ -92,6 +108,8 @@ namespace Duck_Connect
                 mqttClient.Subscribe(new string[] { tabTopic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
                 mqttClient.Subscribe(new string[] { quackTopic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
                 mqttClient.Subscribe(new string[] { duckNameTopic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+                mqttClient.Subscribe(new string[] { spawnDuckTopic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+                mqttClient.Subscribe(new string[] { eraseNamesTopic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
                 _instance.LoggerInstance.Msg("MQTT Connected!");
             }
             catch (Exception e)
@@ -100,36 +118,65 @@ namespace Duck_Connect
             }
         }
 
+        private static void SpawnDuck()
+        {
+            try
+            {
+                _generalManager.spawnCounter = 990;
+            }
+            catch (Exception e)
+            {
+                _instance.LoggerInstance.Error(e);
+            }
+        }
+
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
+            _instance.LoggerInstance.Msg($"Scene Initialized: {sceneName}");
             //Hook GeneralManager
-            if ("Intro" != sceneName)
-            {
-                _ducks.Clear();
-                _generalManager = Object.FindObjectOfType<GeneralManager>();
-                if (_generalManager == null)
-                {
-                    _instance.LoggerInstance.Error("General Manager Didn't Hook!!");
-                    return;
-                }
+            currentScene = sceneName.Replace(" ", "");
 
-                // Creates a second duck on game start so the tabbing logic works properly
-                Traverse.Create(_generalManager).Field("spawnCounter").SetValue(1000);
+            if (CheckScene()) { return; }
+            _ducks.Clear();
+            _generalManager = Object.FindObjectOfType<GeneralManager>();
+            if (_generalManager == null)
+            {
+                _instance.LoggerInstance.Error("General Manager Didn't Hook!!");
             }
+
+            _instance.LoggerInstance.Msg("General Manager Hooked!");
+            currentScene = sceneName.Replace(" ", "");
+        }
+
+        private bool CheckScene()
+        { 
+            var intro = currentScene == "Intro";
+            var BootStrap = currentScene == "Bootstrap";
+            var loading = currentScene == "Loading";
+            var sceneNull = currentScene == "";
+
+            return intro || BootStrap || loading || sceneNull; // Check if Intro Scene is not loaded
         }
 
         public override void OnLateUpdate()
         {
-            var intro = SceneManager.GetActiveScene().name == "Intro";
 
-            if (intro) { return; } // Check if Intro Scene is not loaded
+            if (CheckScene()) { spawnDuck = false; return; }
 
             // Duck renaming can only occur OnLateUpdate, throws an error otherwise
-            if (nameChange) 
-            { 
-                DuckRename(null, newName);
-                nameChange = false;
+            if (currentduck != null && duckName != "")
+            {
+                DuckRename(currentduck, duckName);
+                currentduck = null;
+                duckName = "";
             }
+
+            if (!spawnDuck)
+            {
+                SpawnDuck();
+                spawnDuck = true;
+            }
+            
         }
 
         private void OnMqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
@@ -139,19 +186,26 @@ namespace Duck_Connect
                 // Check which MQTT topic the message was received on
                 if (e.Topic == tabTopic)
                 {
-                    OnTabMessageReceived(); // Ignore message, just look if a message was sent
+                    OnTabMessageReceived();
                 }
                 else if (e.Topic == quackTopic)
                 {
-                    OnQuackMessageReceieved(); // Ignore message, just look if a message was sent
+                    OnQuackMessageReceieved();
+                }
+                else if (e.Topic == spawnDuckTopic)
+                {
+                    SpawnDuck();
+                }
+                else if (e.Topic == eraseNamesTopic)
+                {
                 }
                 else if (e.Topic == duckNameTopic)
                 {
                     string message = Encoding.UTF8.GetString(e.Message);
                     if (string.IsNullOrEmpty(message)) { return; }
-                    
-                    newName = message;
-                    nameChange = true;
+
+                    currentduck = _generalManager.Ducks[_generalManager.CurrentDuck].GetComponent<DuckManager>();
+                    duckName = message;
                 }
                 _instance.LoggerInstance.Msg(e.Topic);
             }
@@ -164,8 +218,7 @@ namespace Duck_Connect
         private void OnTabMessageReceived()
         {
 
-            var intro = SceneManager.GetActiveScene().name == "Intro";
-            if (intro) { return; } // Check if Intro Scene is not loaded       
+            if (CheckScene()) { return; } // Check if Intro Scene is not loaded
 
             var oldduck = _generalManager.Ducks[_generalManager.CurrentDuck].GetComponent<DuckManager>();
             if (oldduck == null) { _instance.LoggerInstance.Error("Duck Not selected"); return; }
@@ -204,12 +257,12 @@ namespace Duck_Connect
 
         private void OnQuackMessageReceieved()
         {
-            try 
+            try
             {
                 _generalManager.Ducks[_generalManager.CurrentDuck].GetComponent<DuckManager>().PlaySound();
             }
-                
-            catch(Exception e)
+
+            catch (Exception e)
             {
                 _instance.LoggerInstance.Msg(e);
             }
@@ -217,7 +270,7 @@ namespace Duck_Connect
 
         public static void DuckRename(DuckManager duckManager = null, string duckName = null) //Void can be used for other mods
         {
-            
+
             try
             {
                 if (duckName == null)
@@ -263,23 +316,82 @@ namespace Duck_Connect
             File.WriteAllText(_savePath, _savecontent);
         }
 
+        private static void WeatherChange() //Forces Weather to Clear
+        {
+            var _enviroweathermodule = Object.FindObjectOfType<EnviroWeatherModule>();
+            var basegm = SceneManager.GetActiveScene().name == "MainScene";
+            var snowdlc = SceneManager.GetActiveScene().name == "dlc2Env";
+            if (basegm)
+            {
+                _enviroweathermodule.ChangeWeather("Clear Sky");
+            }
+            else if (snowdlc)
+            {
+                _enviroweathermodule.ChangeWeather("Clear SkyWinter");
+            }
+            else
+            {
+                _instance.LoggerInstance.Error("Changing Weather is not support in Current Scene yet");
+            }
+
+        }
+
+        private static void OpenDuck() //Opening Ducks out of the Presents. Christmas Event may remove
+        {
+            var gmsAudio =
+                Traverse.Create(_generalManager).Field("seasonOpenContainerAudioSource").GetValue() as AudioSource;
+            var gmsFX =
+                Traverse.Create(_generalManager).Field("seasonOpenContainerFX").GetValue() as ParticleSystem;
+            var gmsFloat = new[] { 0.5f, 0.75f, 1.25f, 1.5f };
+            var lastduck = _generalManager.CurrentDuck;
+            _generalManager.ChangeDuck(0);
+            for (var i = 0; i <= _generalManager.Ducks.Count; i++)
+            {
+                _generalManager.ChangeDuck(i);
+                if (i >= _generalManager.Ducks.Count)
+                {
+                    _generalManager.CurrentDuck = lastduck;
+                    return;
+                }
+
+                var currentduck =
+                    _generalManager.Ducks[_generalManager.CurrentDuck].GetComponent<DuckManager>();
+                if (!currentduck.IsInSeasonContainer) { continue; }
+                _generalManager.AddDuck(currentduck, currentduck.duckID, true, false);
+                currentduck.OnSeasonClick();
+                if (gmsAudio != null && gmsFX != null)
+                {
+                    gmsAudio.pitch = gmsFloat[UnityEngine.Random.Range(0, gmsFloat.Length)];
+                    gmsFX.transform.position = currentduck.transform.position;
+                    gmsFX.Play();
+                    gmsAudio.Play();
+                }
+
+                _instance.LoggerInstance.Msg("Opened " + currentduck);
+            }
+        }
+
+    }
+
+    public abstract class DuckTrainerPatch //Duck Respawn Patch for DuckManager
+    {
+
         //Harmony Patches
         [HarmonyPatch(typeof(GeneralManager), "AddDuck")]
         public class GeneralManager_AddDuck
         {
-            //TODO: Fix Add 2 | Might be internal code \ Might be a bug in the game
-            //BUG: Duck Not Renaming while Spawning a New Duck
-            static void Postfix(ref GeneralManager __instance ,DuckManager duckManager, string duckID, bool unlock = true, bool addToList = true)
+            //TODO: Fix Add 2
+            static void Postfix(ref GeneralManager __instance, DuckManager duckManager, string duckID, bool unlock = true, bool addToList = true)
             {
                 int count = 0;
-                if (DuckConnect._ducks.ContainsKey(duckID))
+                if (Core._ducks.ContainsKey(duckID))
                 {
-                    count = DuckConnect._ducks[duckID];
-                    DuckConnect._ducks[duckID]++;
+                    count = Core._ducks[duckID];
+                    Core._ducks[duckID]++;
                 }
                 else
                 {
-                    DuckConnect._ducks[duckID] = 1;
+                    Core._ducks[duckID] = 1;
                 }
                 string modifiedDuckID = duckID;
                 if (count > 0)
@@ -287,21 +399,20 @@ namespace Duck_Connect
                     modifiedDuckID += "_" + count;
                 }
                 duckManager.duckID = modifiedDuckID;
-                
-                var duckNames = DuckConnect.GetName(modifiedDuckID);
-                duckManager.NameChanged(modifiedDuckID, duckNames);
+                if (Core.NewDuck && Core.AutoName)
+                {
+                    Core._instance.LoggerInstance.Msg("New Duck!");
+                    Core.NewDuck = false;
+                    Core.currentduck = duckManager;
+                }
+                else
+                {
+                    var duckNames = Core.GetName(modifiedDuckID);
+                    duckManager.NameChanged(modifiedDuckID, duckNames);
+                }
+            }
+        }
 
-            }
-        }
-        [HarmonyPatch(typeof(GeneralManager), "Start")]
-        public class GeneralManager_Start
-        {
-            static void Postfix(ref DuckManager ___base1Duck)
-            {
-                var duckNames = DuckConnect.GetName("Duck1Base");
-                ___base1Duck.NameChanged("Duck1Base", duckNames);
-            }
-        }
         [HarmonyPatch(typeof(GeneralManager), "SpawnUpdate")]
         public class SpawnUpdate_Patch
         {
@@ -313,7 +424,7 @@ namespace Duck_Connect
                 Label returnDuck = il.DefineLabel();
                 for (int i = 0; i < code.Count - 1; i++)
                 {
-                    if (code[i].opcode == OpCodes.Stfld && code[i+1].opcode == OpCodes.Ldarg_0)
+                    if (code[i].opcode == OpCodes.Stfld && code[i + 1].opcode == OpCodes.Ldarg_0)
                     {
                         insertionIndex = i;
                         code[i].labels.Add(returnDuck);
@@ -322,9 +433,11 @@ namespace Duck_Connect
                 }
 
                 var instructionsToInsert = new List<CodeInstruction>();
-
+                //
+                // CustomNames.NewDuck = True
+                //
                 instructionsToInsert.Add(new CodeInstruction(OpCodes.Ldc_I4_1, (sbyte)4));
-                instructionsToInsert.Add(new CodeInstruction(OpCodes.Stsfld, AccessTools.Field(typeof(DuckConnect), "NewDuck")));
+                instructionsToInsert.Add(new CodeInstruction(OpCodes.Stsfld, AccessTools.Field(typeof(Core), "NewDuck")));
 
                 if (insertionIndex != -1)
                 {
