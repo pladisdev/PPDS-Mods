@@ -34,7 +34,7 @@ Then, you will have to put mod .dll file from [releases](https://github.com/plad
 To build these, drop required libraries (found in `<Placid Plastic Duck Simulator Instanll dir>\Placid Plastic Duck Simulator_Data\Managed` and both `MelonLoader.dll` `0Harmony.dll` from `<Placid Plastic Duck Simulator Instanll dir>\MelonLoader` after melonloader installation, 
 list found in `Directory.Build.props`) into Libs folder, then use your IDE of choice to build. 
 * You will also need M2Mqtt package from NuGet. v4.3 from Paolo. I used Visual Studio 2022 to get this package. You will get the same DLL file needed for installation.
-* Libs folder is intended for newest libraries (MelonLoader 0.5.7)
+* Libs folder is intended for newest libraries (MelonLoader 0.6.6)
 
 ## TODO
 * Add description for each duckid, to better describe each duck for AI.
